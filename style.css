@@ -213,10 +213,13 @@ pre {
     color: #2c2c2c;
     font-size: 21px;
     text-align: left;
-    width: 90%;
+    width: 120%;
 }
 .site-tagline a,
-.site-tagline a:visited { color: #000000; }
+.site-tagline a:visited { 
+    color: #756D6D;
+    font-weight: 20px;
+ }
 .site-tagline a:hover {
     color: #2c2c2c;
 }
