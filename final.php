@@ -10,14 +10,14 @@
 	}
 
 	// Key for Google Vision API
-	$VISION_API_KEY = "AIzaSyBJxZvjsQti8vmPhHf4hNSBYGWgwjzyim8";
+	$VISION_API_KEY = "AIzaSyAI9USgg5eqwaSWrwRyUKVnANItrt3vACI";
 
 	// Keys for Google Custom Search URLs
-	$GCSE_API_KEY = "AIzaSyBAFX0DpkwYXzPlc4Xd6VawQ_C2cLxwrDw";
-	$GCSE_SEARCH_ENGINE_ID = "E018325934881184339602:ta5v8zjdric";
+	$GCSE_API_KEY = "AIzaSyDrApoB1OrEiS2mlVR5Kz4R0Mz_hxi_Gzk";
+	$GCSE_SEARCH_ENGINE_ID = "002910610359217657510:sveealmtcje";
 
 	// URL of hosted script
-	#$HOST_URL = "www.url.com/screenshot.png";
+	#$HOST_URL = "https://app-1522537595.000webhostapp.com/late.png";
 
 
 	//DETECT TEXT WITH JSON REQUEST TO GOOGLE
@@ -37,7 +37,7 @@
 	          ]
 	        }
 	      ]
-	    }'; */
+	    }';*/
 
 	/*
 		NOTE: IF YOU ARE HOSTING ON LOCALHOST, 
@@ -61,8 +61,7 @@
 	          ]
 	        }
 	      ]
-	    }';
-	
+	    }'; 
 
 	// REQUEST TEXT FROM GOOGLE VISION
 	$ch = curl_init();
@@ -72,7 +71,8 @@
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $JSON_TEST);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$server_output = curl_exec($ch);
-
+	echo $server_output;
+    
 
 
 	// GET TEXT OUTPUT
@@ -120,7 +120,7 @@
 // ------------------- ATTEMPT 1: GOOGLE QUESTION -------------------
 	$query1 = $question . "?";
 	$url1 = "https://www.googleapis.com/customsearch/v1?key=" . $GCSE_API_KEY . "&cx=" . $GCSE_SEARCH_ENGINE_ID . "&q=" . urlencode($query1);
-
+    echo $url1;
 	// Send request googling question
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url1);
@@ -131,6 +131,7 @@
 	$result1 = json_decode($result1, true);
 
 	$items = $result1['items'];
+	echo $items[0];
 
 	// variables for searching
 	$checksites = 0;
@@ -142,7 +143,9 @@
 	foreach ($items as $item) {
     	// Get snippet
         $snippet = $item['snippet'];
+        echo $snippet;
         $totalSnips .= strtolower($snippet);
+        echo $totalSnips;
 
         // Get link for each node
         $link = $item['link'];
@@ -196,6 +199,7 @@
     	$percent1 = $isNotQuestion ? (100 - round(100 * $largestResult1 / $totalResults1)) : round(100 * $largestResult1 / $totalResults1);
     	printf("'%s' %d %d%% \n", $key1, $largestResult1, $percent1);
     } else {
+        printf("'%s' %d %d%% \n", $key1, $largestResult1, $percent1);
     	echo "Inconclusive\n";
     }
 
